@@ -16,11 +16,17 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.xml.xpath.NodeMapper;
 import org.springframework.xml.xpath.XPathExpression;
+import org.springframework.xml.xpath.XPathExpressionFactory;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/*
+ * The binding block is the main building block of a mapping.
+ * A single binding block can hold fragments of XML eg. string chunks, bindable targets and also other binding blocks.
+ * They are arranged in the form of a stack, which makes it possible to iterate over the parts in the user interface layer.
+ */
 public class BindingBlock implements Chunk, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,22 +34,32 @@ public class BindingBlock implements Chunk, Serializable {
 	private List<Chunk> originalStack;
 	private List<Chunk> stack;
 	private static String splitMarker = "__split__";
+	private static String splitExpression = "//block[not(ancestor::block)] | //target[not(ancestor::block)]";
 	private List<String> bound;
 
-	public BindingBlock(Node node, final XPathExpression splitExpression,
-			BindingBlock parent) {
-		this(node, splitExpression);
+	public BindingBlock(Node node, BindingBlock parent) {
+		this(node);
 		this.parent = parent;
 	}
 
 	public BindingBlock() {
-
 	}
 
-	public BindingBlock(Node node, final XPathExpression splitExpression) {
+	private XPathExpression getXPathExpression() {
+		return XPathExpressionFactory.createXPathExpression(splitExpression);
+	}
+
+	/*
+	 * Reads in the data from a DOM node. All <block> and <target> tags are read
+	 * in, and converted to BindingBlock and BindingTarget objects respectively.
+	 * Finally, the block and target tags are removed, XML content is generated
+	 * and converted to StringChunk objects. The stack holds now a listing of
+	 * chunks.
+	 */
+	public BindingBlock(Node node) {
 		final BindingBlock me = this;
 		node = node.cloneNode(true);
-		List<Chunk> chunks = splitExpression.evaluate(node,
+		List<Chunk> chunks = getXPathExpression().evaluate(node,
 				new NodeMapper<Chunk>() {
 					public Chunk mapNode(Node node, int nodeNum)
 							throws DOMException {
@@ -59,8 +75,7 @@ public class BindingBlock implements Chunk, Serializable {
 									// This shouldn't happen ever
 									return null;
 							}
-							result = new BindingBlock(child, splitExpression,
-									me);
+							result = new BindingBlock(child, me);
 						} else if (node.getNodeName()
 								.equalsIgnoreCase("target")) {
 							Element targetElement = (Element) node;
@@ -97,11 +112,13 @@ public class BindingBlock implements Chunk, Serializable {
 					}
 				});
 
-		String xmlString = this.nodeToXMLString(node);
+		String xmlString = BindingBlock.nodeToXMLString(node);
 		List<String> fragments = Arrays.asList(xmlString.split(splitMarker));
 
-		// This should never happen, unless the splitMarker is present in the
-		// source XML
+		// The number of fragments should always be the number of chunks plus
+		// one,
+		// unless the splitMarker is present in the source XML and we should
+		// fail
 		if (fragments.size() != chunks.size() + 1)
 			return;
 
@@ -179,15 +196,6 @@ public class BindingBlock implements Chunk, Serializable {
 	public List<Chunk> getStack() {
 
 		return stack;
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		// Loop through the stack and refer to their respective toString methods
-		for (Chunk chunk : stack) {
-			sb.append(chunk.toString());
-		}
-		return sb.toString();
 	}
 
 	public static String nodeToXMLString(Node node) {
@@ -282,16 +290,28 @@ public class BindingBlock implements Chunk, Serializable {
 		return b;
 	}
 
+	/*
+	 * Inserts a stack into the object. Effectively creates a new BindingBlock.
+	 */
 	public void setStack(List<Chunk> stack) {
 		this.stack = stack;
 	}
 
+	/*
+	 * Sets the parent of this block. A block might not have a parent, which
+	 * would make it a first-level block.
+	 * 
+	 * @see
+	 * fi.museo2015.lidottaja.model.Chunk#setParent(fi.museo2015.lidottaja.model
+	 * .BindingBlock)
+	 */
 	public void setParent(BindingBlock parent) {
 		this.parent = parent;
 	}
 
 	/**
-	 * toXML: builds a XML
+	 * toXML: builds a XML representation of the object corresponding to the
+	 * binding XML format with all the <block> <target> tags etc.
 	 */
 	@Override
 	public String toXML() {
@@ -304,5 +324,20 @@ public class BindingBlock implements Chunk, Serializable {
 			return sb.toString();
 		else
 			return "<block>" + sb.toString() + "</block>";
+	}
+
+	/*
+	 * Returns a string representation of the block without the binding xml
+	 * markers <block> <target> etc.
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		// Loop through the stack and refer to their respective toString methods
+		for (Chunk chunk : stack) {
+			sb.append(chunk.toString());
+		}
+		return sb.toString();
 	}
 }

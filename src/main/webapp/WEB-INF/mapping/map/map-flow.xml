@@ -7,9 +7,8 @@
 
 	<secured attributes="ROLE_USER" />
 	
-	<var name="mapping" class="fi.museo2015.lidottaja.model.Mapping"/>
-	
 	<view-state id="enterMappingName" model="mapping">
+		<var name="mapping" class="fi.museo2015.lidottaja.model.Mapping"/>
 		<on-entry>
 			<evaluate expression="mappingService.findMappings(currentUser.name)" result="flowScope.mappings" />
 		</on-entry>

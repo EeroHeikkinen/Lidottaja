@@ -2,10 +2,10 @@ package fi.museo2015.lidottaja.model;
 
 import java.io.Serializable;
 
+/*
+ * A simple, textual chunk
+ */
 public class StringChunk implements Chunk, Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String content;
 	private BindingBlock parent;
@@ -25,7 +25,6 @@ public class StringChunk implements Chunk, Serializable {
 
 	@Override
 	public boolean getIsBindable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

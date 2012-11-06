@@ -12,21 +12,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.xml.xpath.XPathExpression;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * A backing bean for the main hotel search form. Encapsulates the criteria
- * needed to perform a hotel search.
- * 
- * It is expected a future milestone of Spring Web Flow 2.0 will allow
- * flow-scoped beans like this one to hold references to transient services that
- * are restored automatically when the flow is resumed on subsequent requests.
- * This would allow this SearchCriteria object to delegate to the
- * {@link BookingService} directly, for example, eliminating the need for the
- * actions in {@link MainActions}.
+ * A wrapper for a single mapping
  */
 
 public class Mapping implements Serializable {
@@ -44,29 +35,42 @@ public class Mapping implements Serializable {
 		this.binder = binder;
 	}
 
+	/*
+	 * Generates an initial mapping from a template file. TODO: allow template
+	 * file to be supplied from a configuration file?
+	 */
 	@Autowired
-	public Mapping(@Value("classpath:/lido-template.xml") Resource template,
-			XPathExpression splitExpression) throws IOException,
-			ParserConfigurationException, SAXException {
-		File templateFile = template.getFile();
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		Document doc = dBuilder.parse(templateFile);
-		doc.getDocumentElement().normalize();
-		binder = new BindingBlock(doc, splitExpression);
-	}
-
-	public Mapping(String value, XPathExpression splitExpression)
-			throws IOException, ParserConfigurationException, SAXException {
+	public Mapping(@Value("classpath:/lido-template.xml") Resource template) {
 		try {
-			Document doc = loadXMLFromString(value);
+			File templateFile = template.getFile();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+					.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(templateFile);
 			doc.getDocumentElement().normalize();
-			binder = new BindingBlock(doc, splitExpression);
+			binder = new BindingBlock(doc);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/*
+	 * Generates a mapping from a string Required for loading from a database.
+	 */
+	public Mapping(String value) throws IOException,
+			ParserConfigurationException, SAXException {
+		try {
+			Document doc = loadXMLFromString(value);
+			doc.getDocumentElement().normalize();
+			binder = new BindingBlock(doc);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * Support method for converting a string to a DOM Document
+	 */
 	public static Document loadXMLFromString(String xml) throws Exception {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
@@ -82,18 +86,33 @@ public class Mapping implements Serializable {
 		this.name = name;
 	}
 
+	/*
+	 * Returns a complete XML representation with all the binding metadata
+	 * <target> <block> elements etc
+	 */
 	public String getXML() {
 		return binder.toXML();
 	}
 
+	/*
+	 * Returns a functionally correct representation of the mapping, without any
+	 * of the binding metadata elements
+	 */
 	public String getLido() {
 		return binder.toString();
 	}
 
+	/*
+	 * Whether running in a detached state eg. is the mapping saved to a
+	 * database? Should we update or insert when saving
+	 */
 	public boolean isSaved() {
 		return saved;
 	}
 
+	/*
+	 * Sets whether running in a detached state
+	 */
 	public void setSaved(boolean saved) {
 		this.saved = saved;
 	}

@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lidoWrap xmlns:gml="http://www.opengis.net/gml"
+schemaLocation=
+"http://www.lido-schema.org http://www.lido-schema.org/schema/v1.0/lido-v1.0.xsd
+http://www.opengis.net/gml http://schemas.opengis.net/gml/3.1.1/base/feature.xsd">
+	<lido>
+		<block>
+		<lidoRecID type="NDL">
+			<target>
+				<name>LIDO-tunniste</name>
+				<description>LIDO-tunniste, josta poimitaan objektin yksilöivä numero.</description>
+			</target>
+		</lidoRecID>
+		</block> 
+		<descriptiveMetadata lang="fi">
+			<objectClassificationWrap>
+				<objectWorkTypeWrap>
+					<objectWorkType>
+						<block> 
+						<term>
+							<target>
+								<name>Aineistotyyppi</name>
+								<description>Aineiston luokitus, esim. Kuva, Esine, Arkistoaineisto, Kirja</description>
+							</target>
+						</term>
+						</block>
+					</objectWorkType>
+				</objectWorkTypeWrap>
+				<classificationWrap>
+					<block>
+					<classification>
+						<term>
+							<target>
+								<name>Luokitus</name>
+								<description>Luokitus. Toista tarvittaessa.</description>
+							</target> 
+						</term>
+					</classification>
+					</block>
+				</classificationWrap>
+			</objectClassificationWrap>
+			<objectIdentificationWrap>
+				<titleWrap>
+					<titleSet>
+						<block>
+						<appellationValue>
+							<target>
+								<name>Otsikko</name>
+								<description>Otsikko näytetään hakulistauksissa ensimmäisenä.</description>							
+							</target>
+						</appellationValue>
+						</block>
+					</titleSet>
+				</titleWrap>
+				<repositoryWrap>
+					<repositorySet>
+						<repositoryName>
+							<legalBodyName>
+								<block>
+								<legalBodyID>
+									<target>
+										<name>Legal Body ID</name>
+										<description>Y-tunnus: PRH:n tai veroviranomaisen antama yritystunnus</description>
+									</target>
+								</legalBodyID>
+								</block>
+								<block>
+								<appellationValue>
+									<target>
+										<name>Museon nimi</name>
+										<description>Objektia hallinnoivan museon nimi.</description>
+									</target>
+								</appellationValue>
+								</block>
+							</legalBodyName>
+							<block>
+							<legalBodyWeblink>
+								<target>
+									<name>Museon WWW-osoite</name>
+									<description>Museon WWW-osoite</description>
+								</target>
+		   					</legalBodyWeblink>
+		   					</block>
+						</repositoryName>
+						<block>
+						<workID>
+							<target>
+								<name>Luettelointinumero</name>
+								<description>Objektin museon sisäinen luettelointinumero</description>
+							</target>
+						</workID>
+						</block>
+					</repositorySet>
+				</repositoryWrap>
+				<objectDescriptionWrap>
+					<objectDescriptionSet>
+						<block>
+						<descriptiveNoteValue>
+							<target>
+								<name>Kuvaus</name>
+								<description>Objektin kuvaus</description>
+							</target>
+						</descriptiveNoteValue>
+						</block>
+					</objectDescriptionSet>
+				</objectDescriptionWrap>
+				<objectMeasurementsWrap>
+					<block>
+					<objectMeasurementsSet>
+						<displayObjectMeasurements>
+							<target>
+								<name>Mitat</name>
+								<description>(ohje puuttuu)</description>
+							</target>
+						</displayObjectMeasurements>
+					</objectMeasurementsSet>
+					</block>
+				</objectMeasurementsWrap>
+			</objectIdentificationWrap>
+			<eventWrap>
+				<block>
+				<eventSet>
+					<event>
+						<eventType>
+							<term>valmistus</term>
+						</eventType>
+						<eventActor>
+							<actorInRole>
+								<actor>
+									<nameActorSet>
+										<appellationValue>
+											<target>
+												<name>Toimijan nimi</name>
+												<description>(Ohje puuttuu)</description>
+											</target>	
+										</appellationValue>
+									</nameActorSet>
+								</actor>
+								<roleActor>
+									<term>
+										<target>
+											<name>Toimijan rooli</name>
+											<description>Usein sama kuin eventin tyyppi, esim. käyttäjä, valmistaja, valokuvaaja</description>
+										</target>
+									</term>
+								</roleActor>
+							</actorInRole>
+						</eventActor>
+						<eventDate>
+							<displayDate>
+								<target>
+									<name>Valmistusaika</name>
+									<description>Objektin valmistusaika</description>
+								</target>
+							</displayDate>
+						</eventDate>
+						<eventPlace>
+							<displayPlace>
+								<target>
+									<name>Valmistuspaikka</name>
+									<description>Objektin valmistuspaikka</description>
+								</target>
+							</displayPlace>
+							<place>
+								<namePlaceSet>
+									<appellationValue>
+										<target>
+											<name>Paikannimi</name>
+											<description>(ohje puuttuu)</description>
+										</target>
+									</appellationValue>
+								</namePlaceSet>
+								<gml>
+									<Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+										<coordinates>
+											<target>
+												<name>Koordinaatit</name>
+												<description>Koordinaatit</description>
+											</target>
+										</coordinates>
+									</Point>
+								</gml>
+								<partOfPlace>
+									<namePlaceSet>
+										<appellationValue>
+											<target>
+												<name>Alempi paikannimi</name>
+												<description>(ohje puuttuu)</description>
+											</target>
+										</appellationValue>
+									</namePlaceSet>
+									<partOfPlace>
+										<namePlaceSet>
+											<appellationValue>
+												<target>
+													<name>Vielä alempi paikannimi</name>
+													<description>(ohje puuttuu)</description>
+												</target>
+											</appellationValue>
+										</namePlaceSet>
+									</partOfPlace>
+								</partOfPlace>
+							</place>
+						</eventPlace>
+						<eventMaterialsTech>
+							<materialsTech>
+								<termMaterialsTech type="materiaali">
+									<target>
+										<name>Materiaali</name>
+										<description>(ohje puuttuu)</description>
+									</target>
+								</termMaterialsTech>
+							</materialsTech>
+						</eventMaterialsTech>
+					</event>
+				</eventSet>
+				</block>
+				<block>
+				<eventSet>
+					<event>
+						<eventType>
+							<term>käyttö</term>
+						</eventType>
+						<eventActor>
+							<actorInRole>
+								<actor>
+									<nameActorSet>
+										<appellationValue>
+											<target>
+												<name>Toimijan nimi</name>
+												<description>(Ohje puuttuu)</description>
+											</target>	
+										</appellationValue>
+									</nameActorSet>
+								</actor>
+								<roleActor>
+									<term>
+										<target>
+											<name>Toimijan rooli</name>
+											<description>Usein sama kuin eventin tyyppi, esim. käyttäjä, valmistaja, valokuvaaja</description>
+										</target>
+									</term>
+								</roleActor>
+							</actorInRole>
+						</eventActor>
+						<eventDate>
+							<displayDate>
+								<target>
+									<name>Käyttöaika</name>
+									<description>(Ohje puuttuu)</description>
+								</target>
+							</displayDate>
+						</eventDate>
+					</event>
+				</eventSet>
+				</block>
+				<block>
+				<eventSet>
+					<event>
+						<eventType>
+							<term>muotoilu</term>
+						</eventType>
+						<eventActor>
+							<actorInRole>
+								<actor>
+									<nameActorSet>
+										<appellationValue>
+											<target>
+												<name>Toimijan nimi</name>
+												<description>(Ohje puuttuu)</description>
+											</target>	
+										</appellationValue>
+									</nameActorSet>
+								</actor>
+								<roleActor>
+									<term>
+										<target>
+											<name>Toimijan rooli</name>
+											<description>Usein sama kuin eventin tyyppi, esim. käyttäjä, valmistaja, valokuvaaja</description>
+										</target>
+									</term>
+								</roleActor>
+							</actorInRole>
+						</eventActor>
+						<eventDate>
+							<displayDate>
+								<target>
+									<name>Aika</name>
+									<description>(Ohje puuttuu)</description>
+								</target>
+							</displayDate>
+						</eventDate>
+					</event>
+				</eventSet>
+				</block>
+			</eventWrap>
+			<objectRelationWrap>
+				<subjectWrap>
+					<subjectSet>
+						<subject>
+							<subjectConcept>
+								<block>
+						   		<term>
+						   			<target>
+										<name>Asiasana</name>
+										<description>Asiasana</description>
+									</target>
+								</term>
+								</block>
+							</subjectConcept>
+						</subject>
+					</subjectSet>
+					<block>
+					<subjectSet>
+						<subject>
+							<subjectEvent>
+					   			<displayEvent>
+					   				<target>
+										<name>Liittyvä tapahtuma</name>
+										<description>(ei ohjetta)</description>
+									</target>
+								</displayEvent>
+							</subjectEvent>
+						</subject>
+					</subjectSet>
+					</block>
+					<block>
+					<subjectSet>
+						<subject>
+							<subjectActor>
+					   			<displayEvent>
+					   				<target>
+										<name>Liittyvä toimija</name>
+										<description>(ei ohjetta)</description>
+									</target>
+								</displayEvent>
+							</subjectActor>
+						</subject>
+					</subjectSet>
+					</block>
+				</subjectWrap>
+				<relatedWorksWrap>
+					<relatedWorkSet>
+						<relatedWork>
+							<block>
+							<displayObject>
+								<target>
+									<name>Kokoelma</name>
+									<description>Kokoelma</description>
+								</target>
+							</displayObject>
+							</block>
+						</relatedWork>
+						<relatedWorkRelType>
+							<term>kokoelma</term>
+						</relatedWorkRelType>
+					</relatedWorkSet>
+					<block>
+					<relatedWorkSet>
+						<relatedWork>
+							<displayObject>
+								<target>
+									<name>Liittyvä objekti</name>
+									<description>(ei ohjetta)</description>
+								</target>
+							</displayObject>
+						</relatedWork>
+						<relatedWorkRelType>
+							<term>
+								<target>
+									<name>Suhteen tyyppi</name>
+									<description>Suhde liittyvään objektiin, esim. reproduktio</description>
+								</target>
+							</term>
+						</relatedWorkRelType>
+					</relatedWorkSet>
+					</block>
+				</relatedWorksWrap>
+			</objectRelationWrap>
+		</descriptiveMetadata>
+		<administrativeMetadata lang="fi">
+			<rightsWorkWrap>
+				<rightsWorkSet>
+					<rightsType>
+					<block>
+					<term>
+						<target>
+							<name>Oikeustyyppi</name>
+							<description>Objektiin liittyvien oikeuksien tyyppi</description>
+						</target>
+					</term>
+					</block>
+					</rightsType>
+					<rightsHolder>
+						<legalBodyName>
+							<block>
+							<appellationValue>
+								<target>
+									<name>Oikeuksienhaltija</name>
+									<description>Oikeuksien haltija</description>
+								</target>
+							</appellationValue>
+							</block>
+						</legalBodyName>
+					</rightsHolder>
+				</rightsWorkSet>
+			</rightsWorkWrap>
+			<recordWrap>
+				<block>
+				<recordID type="local">
+		   			<target>
+						<name>Sisäinen tunniste</name>
+						<description>Järjestelmän sisäinen tunniste objektille</description>
+					</target>
+				</recordID>
+				</block>
+				<recordType>
+					<term lang="en">item</term>
+				</recordType>
+				<recordSource>
+					<legalBodyName>
+						<block>
+						<legalBodyID>
+							<target>
+								<name>Legal Body ID</name>
+								<description>Y-tunnus: PRH:n tai veroviranomaisen antama yritystunnus</description>
+							</target>
+						</legalBodyID>
+						</block>
+						<block>
+						<appellationValue>
+							<target>
+								<name>Museon nimi</name>
+								<description>Objektia hallinnoivan museon nimi.</description>
+							</target>
+						</appellationValue>
+						</block>
+					</legalBodyName>
+					<block>
+					<legalBodyWeblink>
+						<target>
+							<name>Museon WWW-osoite</name>
+							<description>Museon WWW-osoite</description>
+						</target>
+   					</legalBodyWeblink>
+   					</block>
+				</recordSource>
+			</recordWrap>
+			<resourceWrap>
+				<resourceSet>
+					<block>
+					<resourceRepresentation>
+						<linkResource>
+							<target>
+								<name>Kuva</name>
+								<description>URL objektia koskevaan kuvaan</description>
+							</target>
+						</linkResource>
+					</resourceRepresentation>
+					</block>
+				</resourceSet>
+			</resourceWrap>
+		</administrativeMetadata>
+	</lido>
+</lidoWrap>

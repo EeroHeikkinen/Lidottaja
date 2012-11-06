@@ -2,6 +2,10 @@ package fi.museo2015.lidottaja.model;
 
 import java.io.Serializable;
 
+/*
+ * A chunk that is bindable. 
+ * This is the type that holds the actual bindings of the mapping.
+ */
 public class BindingTarget implements Chunk, Bindable, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -9,6 +13,7 @@ public class BindingTarget implements Chunk, Bindable, Serializable {
 	private String description;
 	private String value;
 	private String field;
+	private int index = 0;
 	private boolean required;
 	private BindingBlock parent;
 
@@ -118,7 +123,8 @@ public class BindingTarget implements Chunk, Bindable, Serializable {
 		BindingTarget c = new BindingTarget();
 		c.description = description;
 		c.field = field;
-		c.name = name + "_";
+		c.name = this.name;
+		c.index = this.index + 1;
 		c.parent = null;
 		c.required = required;
 		c.value = value;
@@ -135,4 +141,11 @@ public class BindingTarget implements Chunk, Bindable, Serializable {
 		parent = b;
 	}
 
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
 }

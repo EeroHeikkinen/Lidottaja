@@ -1,5 +1,8 @@
 package fi.museo2015.lidottaja.model;
 
+/*
+ * The interface for differents sorts of chunks in the working stack of a mapping.
+ */
 public interface Chunk {
 	public boolean getHasStack();
 
