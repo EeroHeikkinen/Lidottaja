@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+      	http://www.springframework.org/schema/webflow
+      	http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- <secured attributes="ROLE_USER" />-->
+	
+	<input name="fieldName"/>
+	<input name="mapping"/>
+
+	<on-start>
+		<evaluate expression="mapping.binder.getTarget(fieldName)" result="flowScope.field" />
+        <!--<evaluate expression="bindingTarget.getParent().isBound()" result="flowScope.wasBound" />-->
+    </on-start>
+    <!-- 
+	<decision-state id="createOrEdit">
+        <if test="bindingTarget.bound" then="editField" else="createField" />
+    </decision-state>
+    
+    <action-state id="createField">
+        <evaluate expression="fieldBean" result="flowScope.field" />
+        <transition to="fieldForm" />
+    </action-state>
+
+    <action-state id="editField">
+        <transition to="fieldForm" />
+    </action-state>-->
+            
+    <view-state id="fieldForm" model="field">
+        <transition on="save" to="saveField"/>
+        <transition on="cancel" to="cancelField" bind="false" />
+    </view-state>
+    
+    <end-state id="saveField">
+        <output name="target" value="field"/>
+    </end-state>
+
+    <end-state id="cancelField" />
+
+</flow>

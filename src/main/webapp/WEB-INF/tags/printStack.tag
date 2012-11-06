@@ -1,0 +1,6 @@
+<%@ tag description="render a binding block" pageEncoding="UTF-8"%><%@ 
+taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 
+%><%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" 
+%><%@ taglib tagdir="/WEB-INF/tags" prefix="tag"  
+%><%@ attribute name="stack" required="true" type="fi.museo2015.lidottaja.model.Chunk"
+%><c:forEach items="${stack.stack}" var="item"><c:choose><c:when test="${item.hasStack == true}"><span class="bindingGroup"><tag:printStack stack="${item}"/></span><c:if test="${item.isMapped == true}"><a href="${flowExecutionUrl}&_eventId_duplicate&bindingPoint=${item.firstTarget.name}">(+)</a></c:if></c:when><c:when test="${item.isBindable == true}"><c:choose><c:when test="${empty item.value}"><span class="bindingPoint"><a href="${flowExecutionUrl}&_eventId_createField&bindingPoint=${item.name}">${item.name}</a></span></c:when><c:otherwise><a href="${flowExecutionUrl}&_eventId_createField&bindingPoint=${item.name}"><span class="example">${item.value }</span></a></c:otherwise></c:choose></c:when><c:otherwise><c:out value="${item}"/></c:otherwise></c:choose></c:forEach><%--</pre></td></tr><tr><td class="docs">Docs</td><td class="code"><pre class="prettyprint">--%>
