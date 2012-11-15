@@ -31,11 +31,11 @@ public class BindingBlock implements Chunk, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private BindingBlock parent;
-	private List<Chunk> originalStack;
 	private List<Chunk> stack;
 	private static String splitMarker = "__split__";
 	private static String splitExpression = "//block[not(ancestor::block)] | //target[not(ancestor::block)]";
 	private List<String> bound;
+	private int id;
 
 	public BindingBlock(Node node, BindingBlock parent) {
 		this(node);
@@ -57,6 +57,7 @@ public class BindingBlock implements Chunk, Serializable {
 	 * chunks.
 	 */
 	public BindingBlock(Node node) {
+		this.id = counter++;
 		final BindingBlock me = this;
 		node = node.cloneNode(true);
 		List<Chunk> chunks = getXPathExpression().evaluate(node,
@@ -128,9 +129,6 @@ public class BindingBlock implements Chunk, Serializable {
 			stack.add(chunks.get(i));
 			stack.add(new StringChunk(fragments.get(i + 1)));
 		}
-
-		originalStack = new ArrayList<Chunk>();
-		originalStack.addAll(stack);
 	}
 
 	public BindingBlock(BindingBlock bindingBlock) {
@@ -233,12 +231,12 @@ public class BindingBlock implements Chunk, Serializable {
 		return false;
 	}
 
-	public BindingTarget getTarget(String id) {
+	public BindingTarget getTarget(int id) {
 		BindingTarget result = null;
 		for (Chunk chunk : stack) {
 			if (chunk instanceof BindingTarget) {
 				result = (BindingTarget) chunk;
-				if (result.getName().equalsIgnoreCase(id))
+				if (result.getId() == id)
 					return result;
 			} else if (chunk.getHasStack()) {
 				result = ((BindingBlock) chunk).getTarget(id);
@@ -246,6 +244,24 @@ public class BindingBlock implements Chunk, Serializable {
 					return result;
 			}
 		}
+		return null;
+	}
+
+	private static int counter = 0;
+
+	public BindingBlock getBlock(int id) {
+		BindingBlock result = null;
+		for (Chunk chunk : stack) {
+			if (chunk instanceof BindingBlock) {
+				result = (BindingBlock) chunk;
+				if (result.getId() == id)
+					return result;
+				result = result.getBlock(id);
+				if (result != null)
+					return result;
+			}
+		}
+		// Not found!! :-(
 		return null;
 	}
 
@@ -264,6 +280,12 @@ public class BindingBlock implements Chunk, Serializable {
 			}
 		}
 		this.parent.addChunkAfter(copy, this);
+	}
+
+	public void delete() {
+		if (this.parent == null)
+			return;
+		this.parent.stack.remove(this);
 	}
 
 	public boolean getHasMappedTarget() {
@@ -287,6 +309,7 @@ public class BindingBlock implements Chunk, Serializable {
 		}
 		b.setStack(newStack);
 		b.setParent(parent);
+		b.setId(counter++);
 		return b;
 	}
 
@@ -339,5 +362,13 @@ public class BindingBlock implements Chunk, Serializable {
 			sb.append(chunk.toString());
 		}
 		return sb.toString();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

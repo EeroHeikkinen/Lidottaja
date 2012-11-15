@@ -6,22 +6,24 @@ import java.io.Serializable;
  * A chunk that is bindable. 
  * This is the type that holds the actual bindings of the mapping.
  */
-public class BindingTarget implements Chunk, Bindable, Serializable {
+public class BindingTarget implements Chunk, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private String description;
 	private String value;
 	private String field;
-	private int index = 0;
-	private boolean required;
 	private BindingBlock parent;
+	private static int counter = 0;
+	private int id;
 
 	BindingTarget(String name) {
+		this.id = counter++;
 		this.name = name;
 	}
 
 	BindingTarget(String name, String description) {
+		this.id = counter++;
 		this.name = name;
 		this.description = description;
 	}
@@ -76,14 +78,6 @@ public class BindingTarget implements Chunk, Bindable, Serializable {
 		this.description = description;
 	}
 
-	public boolean isRequired() {
-		return this.required;
-	}
-
-	public void setRequired(boolean required) {
-		this.required = required;
-	}
-
 	@Override
 	public boolean getHasStack() {
 		return false;
@@ -94,7 +88,6 @@ public class BindingTarget implements Chunk, Bindable, Serializable {
 		return true;
 	}
 
-	@Override
 	public void bind(String value) {
 		this.value = value;
 	}
@@ -124,10 +117,9 @@ public class BindingTarget implements Chunk, Bindable, Serializable {
 		c.description = description;
 		c.field = field;
 		c.name = this.name;
-		c.index = this.index + 1;
 		c.parent = null;
-		c.required = required;
 		c.value = value;
+		c.id = counter++;
 		return c;
 	}
 
@@ -141,11 +133,7 @@ public class BindingTarget implements Chunk, Bindable, Serializable {
 		parent = b;
 	}
 
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
+	public int getId() {
+		return id;
 	}
 }

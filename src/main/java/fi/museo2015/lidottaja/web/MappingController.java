@@ -46,7 +46,7 @@ public class MappingController {
 	 * 
 	 * @param name The name of the mapping
 	 */
-	@RequestMapping(value = "/docs/{name}", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "/docs/{name}.html", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String docs(@PathVariable String name) {
 		String docs = documentationService.getDocumentation(name);
@@ -57,10 +57,10 @@ public class MappingController {
 			return "Documentation for mapping could not be found";
 	}
 
-	@RequestMapping(value = "/src/{name}", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "/src/{name}.xml", method = RequestMethod.GET, produces = "text/xml;charset=UTF-8")
 	@ResponseBody
 	public String src(@PathVariable String name) {
-		String xml = documentationService.getDocumentation(name);
+		String xml = documentationService.getSource(name);
 		if (xml != null)
 			return xml;
 		else

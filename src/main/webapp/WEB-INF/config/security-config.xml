@@ -8,19 +8,21 @@
 
 	<!-- Configure Spring Security -->
 	<security:http auto-config="true">
+		<!-- <security:openid-login authentication-failure-url="/openidlogin.jsp?login_error=true">
+            <security:attribute-exchange>
+                <security:openid-attribute name="email" type="http://schema.openid.net/contact/email" required="true" count="2"/>
+                <security:openid-attribute name="name" type="http://schema.openid.net/namePerson/friendly" />
+            </security:attribute-exchange>
+        </security:openid-login>-->
 		<security:form-login login-page="/login" login-processing-url="/loginProcess" 
 			default-target-url="/mapping/map" authentication-failure-url="/login?login_error=1" />
 		<security:logout logout-url="/logout" logout-success-url="/logoutSuccess" />
 	</security:http>
 	
 	<!--
-		Define local authentication provider, a real app would use an external provider (JDBC, LDAP, CAS, etc)
-		
 		usernames/passwords are:
-			keith/melbourne
-			erwin/leuven
-			jeremy/atlanta
 			scott/rochester
+			hkm/hkm3565
 	-->
 	<security:authentication-manager>
 		<security:authentication-provider>
@@ -28,6 +30,7 @@
 			<security:user-service>
 				<security:user name="scott" password="942f2339bf50796de535a384f0d1af3e" authorities="ROLE_USER" />
 				<security:user name="hkm" password="608978cd68ba8a33fc0f363153975c90" authorities="ROLE_USER" />
+				<security:user name="http://jimi.hendrix.myopenid.com/" authorities="ROLE_USER" />
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <%@ page import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" %>
 <%@ page import="org.springframework.security.core.AuthenticationException" %>
@@ -21,7 +22,7 @@
 	</c:if>
 	<form name="f" action="<c:url value="/loginProcess" />" method="post">
 		<fieldset>
-			<legend>Kirjaudu sis‰‰n</legend>
+			<legend><spring:message code="login"/></legend>
 			<p>
 				<label for="j_username">K‰ytt‰j‰:</label>
 				<br />

@@ -1,6 +1,4 @@
 eclipse.preferences.version=1
-encoding//src/main/webapp/WEB-INF/classes/lido-template.xml=UTF-8
+encoding//src/main/resources/lido-template.xml=UTF-8
 encoding//src/main/webapp/WEB-INF/mapping/field/fieldForm.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/mapping/map/configureMapping.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/mapping/map/enterMappingFields.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/mapping/searchForm.jsp=UTF-8
