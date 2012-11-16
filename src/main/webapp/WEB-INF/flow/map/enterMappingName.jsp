@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <td class="docs">
-<h1>Luo uusi mappaus-profiili</h1>
+<h1><spring:message code="mapping.createnew"/></h1>
 
 <form:form modelAttribute="mapping" action="${flowExecutionUrl}" method="post" cssClass="inline">
     <span class="errors span-18">

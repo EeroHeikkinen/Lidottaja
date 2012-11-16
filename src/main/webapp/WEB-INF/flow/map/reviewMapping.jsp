@@ -11,7 +11,7 @@
 	<fieldset>
 		<legend>Lataa muodossa</legend>
 		<div class="span-8" style="font-size: 30pt; line-height: 39pt">  
-			<a href="/LidoMapper/src/${mapping.name}.xml">XML</a> <a href="/LidoMapper/docs/${mapping.name}.html">HTML</a> <!-- <a href="/LidoMapper/zip/">ZIP</a>-->
+			<a href="src/${mapping.name}.xml">XML</a> <a href="docs/${mapping.name}.html">HTML</a> <!-- <a href="/LidoMapper/zip/">ZIP</a>-->
 		</div>
 		<div class="span-3 last">
 			<button type="submit" id="ok" name="_eventId_ok">OK</button>

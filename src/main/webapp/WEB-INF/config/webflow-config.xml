@@ -14,10 +14,10 @@
 	</webflow:flow-executor>
 	
 	<!-- The registry of executable flow definitions -->
-	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices" base-path="/WEB-INF">
+	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices" base-path="/WEB-INF/flow">
 		<webflow:flow-location-pattern value="/**/*-flow.xml" />
 	</webflow:flow-registry>
-
+	
 	<!-- Plugs in a custom creator for Web Flow views -->
 	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" 
 		development="true" validator="validator" />

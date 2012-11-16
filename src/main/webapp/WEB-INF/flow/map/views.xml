@@ -5,35 +5,31 @@
 	
 <tiles-definitions>
 	<definition name="introduction" extends="standardLayout">
-		<put-attribute name="body" value="/WEB-INF/intro.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/flow/map/intro.jsp"/>
 	</definition>
 	
 	<definition name="enterMappingName" extends="standardLayout">
-		<put-attribute name="body" value="/WEB-INF/mapping/map/enterMappingName.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/flow/map/enterMappingName.jsp"/>
 	</definition>
 	
 	<definition name="enterMappingFields" extends="standardLayout">
-		<put-attribute name="body" value="/WEB-INF/mapping/map/enterMappingFields.jsp"/>
-	</definition>
-	
-	<definition name="fieldForm" extends="standardLayout">
-		<put-attribute name="body" value="/WEB-INF/mapping/field/fieldForm.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/flow/map/enterMappingFields.jsp"/>
 	</definition>
 	
 	<definition name="enterMappingExamples" extends="standardLayout">
-		<put-attribute name="body" value="/WEB-INF/mapping/map/enterMappingExamples.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/flow/map/enterMappingExamples.jsp"/>
 	</definition>
 	
 	<definition name="configureMapping" extends="standardLayout">
-		<put-attribute name="body" value="/WEB-INF/mapping/map/configureMapping.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/flow/map/configureMapping.jsp"/>
 	</definition>
 	
 	<definition name="mappingDone" extends="standardLayout">
-		<put-attribute name="body" value="/WEB-INF/mapping/map/reviewMapping.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/flow/map/reviewMapping.jsp"/>
 	</definition>
 	
 	<definition name="reviewBooking" extends="standardLayout">
-		<put-attribute name="body" value="/WEB-INF/hotels/booking/reviewBooking.jsp" />
+		<put-attribute name="body" value="/WEB-INF/flow/map/reviewBooking.jsp" />
 	</definition>
 	
 </tiles-definitions>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+      	http://www.springframework.org/schema/webflow
+      	http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<secured attributes="ROLE_USER" />
+	
+	<var name="mapping" class="fi.museo2015.lidottaja.model.Mapping"/>
+	
+	<view-state id="enterMappingName" model="mapping">
+		<on-entry>
+			<evaluate expression="mappingService.findMappings(currentUser.name)" result="flowScope.mappings" />
+		</on-entry>
+		<on-render>
+			<render fragments="body" />
+		</on-render>
+		<transition on="proceed" to="configureMapping" />
+		<transition on="modifyMapping" to="configureMapping">
+			<set name="mapping" value="mappings.get(requestParameters.mappingIndex)"/>
+		</transition>
+	</view-state>
+	
+	<view-state id="configureMapping" model="mapping">
+		<!-- <on-entry>
+			<evaluate expression="mapping.getNextUnmapped()" result="flowScope.fieldToConfig" />
+		</on-entry>-->
+		<on-render>
+			<evaluate expression="previewService.pushPreview(mapping.getName(), mapping.getLido())"/>
+			<render fragments="body" />
+		</on-render>
+		<transition on="previous" to="enterMappingName" />
+		<transition on="map" to="configureMapping">
+			<evaluate expression="mapping.setBinding(requestParameters.target, fieldToConfig)"/>
+			<evaluate expression="fieldToConfig.setTarget(requestParameters.target)"/>
+		</transition>
+		<transition on="proceed" to="mappingDone">
+			<evaluate expression="mappingService.persistMapping(mapping, currentUser.name)" />
+		</transition>
+		<transition on="duplicate">
+			<evaluate expression="mapping.binder.getBlock(requestParameters.bindingBlock).duplicate()" />  
+		</transition>
+		<transition on="delete">
+			<evaluate expression="mapping.binder.getBlock(requestParameters.bindingBlock).delete()" />  
+		</transition>
+		<transition on="createField" to="createField" />
+		<transition on="cancel" to="cancel" bind="false" />
+	</view-state>
+	
+	<subflow-state id="createField" subflow="field">
+		<!-- <input name="bindingPoint" value="mapping.binder.getTarget(requestParameters.bindingPoint)"/>-->
+		<input name="id" value="requestParameters.bindingPoint"/>
+		<input name="mapping" value="mapping"/>
+        <transition on="saveField" to="configureMapping"/>
+        <transition on="cancelField" to="configureMapping" />
+    </subflow-state>
+	
+	<view-state id="mappingDone">
+		<on-entry>
+			<evaluate expression="documentationService.generateDocumentation(mapping)"/>
+		</on-entry>
+		<on-render>
+			<render fragments="body" />
+		</on-render>
+		<transition on="ok" to="ok" />
+	</view-state>
+
+	<end-state id="cancel" />
+	<end-state id="ok" />
+
+</flow>

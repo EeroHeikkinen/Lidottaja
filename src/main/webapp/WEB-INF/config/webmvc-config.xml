@@ -11,29 +11,6 @@
 
 	<mvc:resources mapping="/resources/**" location="/, classpath:/META-INF/web-resources/" />
 	<mvc:default-servlet-handler />
-	
-	<bean id="messageSource"
-	    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-	    <property name="basename" value="classpath:messages" />
-	    <property name="defaultEncoding" value="UTF-8"/>
-	</bean>
-	 
-	<bean id="localeChangeInterceptor"
-	    class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-	    <property name="paramName" value="lang" />
-	</bean>
-	 
-	<bean id="localeResolver"
-	    class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-	    <property name="defaultLocale" value="fi"/>
-	</bean>
-	 
-	<bean id="handlerMapping"
-	    class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-	    <property name="interceptors">
-	        <ref bean="localeChangeInterceptor" />
-	    </property>
-	</bean>
     
 	<!-- Maps request paths to flows in the flowRegistry; e.g. a path of /hotels/booking looks for a flow with id "hotels/booking". -->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
@@ -45,6 +22,22 @@
 	<mvc:view-controller path="/" view-name="intro" />
 	<mvc:view-controller path="/login" />
 	<mvc:view-controller path="/logoutSuccess" />
+	
+	<bean id="messageSource"
+    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="classpath:messages" />
+	    <property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+	<bean id="localeResolver"
+    class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+	    <property name="defaultLocale" value="fi"/>
+	</bean>
+	 
+	<mvc:interceptors>         
+	     <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	     	<property name="paramName" value="lang"/>
+	     </bean>
+	</mvc:interceptors>
 
 	<!-- Resolves logical view names returned by Controllers to Tiles; a view name to resolve is treated as the name of a tiles definition -->
 	<bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
