@@ -55,9 +55,8 @@ http://www.opengis.net/gml http://schemas.opengis.net/gml/3.1.1/base/feature.xsd
 						<inscriptionDescription>
 							<descriptiveNoteValue>
 								<target>
-									<name>Merkinnät</name>
-									<description>Wrapper for a description of the inscription, including description
-identifer, descriptive note of the inscription and sources.</description>							
+									<name>Otsikko</name>
+									<description>Otsikko näytetään hakulistauksissa ensimmäisenä.</description>							
 								</target>	
 							</descriptiveNoteValue>
 						</inscriptionDescription>
@@ -221,14 +220,6 @@ identifer, descriptive note of the inscription and sources.</description>
 								</partOfPlace>
 							</place>
 						</eventPlace>
-						<block><eventMethod>
-							<term>
-								<target>
-									<name>Valmistustapa</name>
-									<description>(ohje puuttuu)</description>
-								</target>
-							</term>
-						</eventMethod></block>
 						<eventMaterialsTech> 
 							<materialsTech>
 								<termMaterialsTech type="materiaali">

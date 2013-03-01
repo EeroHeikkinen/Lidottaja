@@ -1,23 +1,22 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+﻿<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <td class="docs"> 
-<form:form action="map" method="post" cssClass="inline">
-	<h1><spring:message code="intro.welcome"/></h1>
+<form:form action="mapping/map" method="post" cssClass="inline">
+	<h1>Tervetuloa LIDOttimeen</h1>
 	<p>
-	 	<spring:message code="intro.general"/>
+	 	Tämä työkalu auttaa sinua luomaan LIDO-mappauksen järjestelmääsi. Työkalu tekee sinulle määrittelyt, jotka voit antaa järjestelmäntoimittajallesi.
 	</p>
 	<hr/> 
 	<p>
-		<spring:message code="intro.steps"/>
+		Työkalua käytetään seuraavien vaiheiden kautta:
 	</p>
 	<ul>
-		<li><spring:message code="intro.step1"/></li>
-		<li><spring:message code="intro.step2"/></li>
-		<li><spring:message code="intro.step3"/></li>
+		<li>Teet mappauksen aineistotyypille</li>
+		<li>Annat esimerkki-tietueen, jotta näet miten mappaus toimii</li>
+		<li>Toimitat spesifikaatiot järjestelmäntoimittajallesi</li>
 	</ul>
 	<p>
-		<button type="submit" id="proceed" name="_eventId_proceed"><spring:message code="intro.begin"/></button>
+		<button type="submit" id="proceed" name="_eventId_proceed">Aloita</button>
 	</p>
 </form:form>
 </td>

@@ -41,4 +41,4 @@
 </td>
 
 <tr>
-<td></td><td class="code"><iframe style="width:100%; height: 600px;" src="preview/${mapping.name}"></iframe></td>
+<td></td><td class="code"><iframe style="width:100%; height: 600px;" src="../preview/${mapping.name}"></iframe></td>

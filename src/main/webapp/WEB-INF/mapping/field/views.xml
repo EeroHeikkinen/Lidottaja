@@ -6,7 +6,7 @@
 <tiles-definitions>
 	
 	<definition name="fieldForm" extends="standardLayout">
-		<put-attribute name="body" value="/WEB-INF/flow/field/fieldForm.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/mapping/field/fieldForm.jsp"/>
 	</definition>
 	
 </tiles-definitions>
